@@ -104,3 +104,14 @@ def wbfg(str1,list):
 
     return list1
 
+def swj(str,number,tw): #删文本(文本,数量,头尾(l,r))
+    if len(str) - number <= 0:
+        return None
+    st = ''
+    if tw == 'r':
+        for i in range(len(str)-number):
+            st+=str[i]
+    elif tw == 'l':
+        for i in range(len(str)-number):
+            st+=str[i+number]
+    return st
