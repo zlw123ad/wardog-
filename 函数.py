@@ -1,6 +1,5 @@
 import math
 
-
 def is_number(s):
     try:  # 如果能运行float(s)语句，返回True（字符串s是浮点数）
         float(s)
