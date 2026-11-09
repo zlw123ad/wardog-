@@ -3,6 +3,7 @@ import pyperclip
 import customtkinter as ctk
 import pyauto_desktop
 from CTkToolTip import CTkToolTip
+from customtkinter import ThemeManager
 from pyexpat.errors import messages
 
 from 函数 import lenn,wbfg,swj
@@ -87,11 +88,130 @@ screen0 = pyauto_desktop.Session(
 region = (81, 194, 119, 29)
 
 #-------------------------------------------------------------------------------------------
-
+THEME_DICT = {
+  "CTk": {
+    "fg_color": ["#F2F2F2", "#1A1A1A"]
+  },
+  "CTkToplevel": {
+    "fg_color": ["#F2F2F2", "#1A1A1A"]
+  },
+  "CTkTopLevel": {
+    "fg_color": ["#FFFFFF", "#212121"]
+  },
+  "CTkFrame": {
+    "corner_radius": 8,
+    "border_width": 0,
+    "fg_color": ["#FFFFFF", "#212121"],
+    "top_fg_color": ["#EBEBEB", "#2B2B2B"],
+    "border_color": ["#D9D9D9", "#333333"]
+  },
+  "CTkButton": {
+    "corner_radius": 6,
+    "border_width": 0,
+    "fg_color": ["#C86A32", "#B85928"],
+    "hover_color": ["#B55E2B", "#A34D21"],
+    "border_color": ["#C86A32", "#B85928"],
+    "text_color": ["#FFFFFF", "#FFFFFF"],
+    "text_color_disabled": ["#A0A0A0", "#606060"]
+  },
+  "CTkLabel": {
+    "corner_radius": 0,
+    "fg_color": "transparent",
+    "text_color": ["#000000", "#FFFFFF"]
+  },
+  "CTkEntry": {
+    "corner_radius": 6,
+    "border_width": 2,
+    "fg_color": ["#F9F9F9", "#2B2B2B"],
+    "border_color": ["#D9D9D9", "#444444"],
+    "text_color": ["#000000", "#FFFFFF"],
+    "placeholder_text_color": ["#808080", "#999999"]
+  },
+  "CTkProgressBar": {
+    "corner_radius": 1000,
+    "border_width": 0,
+    "fg_color": ["#D9D9D9", "#333333"],
+    "progress_color": ["#C86A32", "#B85928"],
+    "border_color": ["#D9D9D9", "#333333"]
+  },
+  "CTkSlider": {
+    "corner_radius": 1000,
+    "button_length": 0,
+    "button_corner_radius": 1000,
+    "button_color": ["#C86A32", "#B85928"],
+    "button_hover_color": ["#B55E2B", "#A34D21"],
+    "fg_color": ["#D9D9D9", "#333333"],
+    "progress_color": ["#C86A32", "#B85928"],
+    "border_width": 0,
+    "border_color": ["#D9D9D9", "#333333"]
+  },
+  "CTkSwitch": {
+    "corner_radius": 1000,
+    "button_length": 0,
+    "button_corner_radius": 1000,
+    "button_color": ["#FFFFFF", "#FFFFFF"],
+    "button_hover_color": ["#F0F0F0", "#F0F0F0"],
+    "fg_color": ["#D9D9D9", "#333333"],
+    "progress_color": ["#C86A32", "#B85928"],
+    "border_width": 0,
+    "border_color": ["#D9D9D9", "#333333"]
+  },
+  "CTkCheckBox": {
+    "corner_radius": 6,
+    "border_width": 2,
+    "fg_color": ["#C86A32", "#B85928"],
+    "border_color": ["#D9D9D9", "#444444"],
+    "hover_color": ["#B55E2B", "#A34D21"],
+    "checkmark_color": ["#FFFFFF", "#FFFFFF"],
+    "text_color": ["#000000", "#FFFFFF"],
+    "text_color_disabled": ["#A0A0A0", "#606060"]
+  },
+  "CTkRadioButton": {
+    "corner_radius": 1000,
+    "border_width_checked": 6,
+    "border_width_unchecked": 2,
+    "fg_color": ["#C86A32", "#B85928"],
+    "border_color": ["#D9D9D9", "#444444"],
+    "hover_color": ["#B55E2B", "#A34D21"],
+    "text_color": ["#000000", "#FFFFFF"],
+    "text_color_disabled": ["#A0A0A0", "#606060"]
+  },
+  "CTkScrollbar": {
+    "corner_radius": 1000,
+    "border_width": 0,
+    "fg_color": ["#D9D9D9", "#333333"],
+    "button_color": ["#A0A0A0", "#606060"],
+    "button_hover_color": ["#808080", "#999999"]
+  },
+  "CTkSegmentedButton": {
+    "corner_radius": 6,
+    "border_width": 2,
+    "fg_color": ["#F9F9F9", "#2B2B2B"],
+    "selected_color": ["#C86A32", "#B85928"],
+    "selected_hover_color": ["#B55E2B", "#A34D21"],
+    "unselected_color": ["#FFFFFF", "#212121"],
+    "unselected_hover_color": ["#F0F0F0", "#333333"],
+    "text_color": ["#000000", "#FFFFFF"]
+  },
+  "CTkTextbox": {
+    "corner_radius": 6,
+    "border_width": 0,
+    "fg_color": ["#F9F9F9", "#2B2B2B"],
+    "border_color": ["#D9D9D9", "#444444"],
+    "text_color": ["#000000", "#FFFFFF"],
+    "scrollbar_button_color": ["#D9D9D9", "#333333"],
+    "scrollbar_button_hover_color": ["#A0A0A0", "#606060"]
+  },
+  "CTkFont": {
+    "family": "Microsoft YaHei UI",
+    "size": 13,
+    "weight": "normal"
+  }
+}
 #外观
 ctk.set_appearance_mode('System')
 #主题颜色
-ctk.set_default_color_theme('blue')
+ctk.ThemeManager.theme = THEME_DICT
 #窗口设置
 root = ctk.CTk()
 root.title('迫击炮 @ZhilLw17')
@@ -103,7 +223,7 @@ root.iconbitmap(resource_path('1145.ico'))
 #root.configure(width=200, height=200)
 #root.grid_propagate(False)
 
-#计算
+#点击
 def on_click(name):
 
     global kg,zd,zhuangt,txsb
@@ -171,8 +291,8 @@ def slider1_change(value):  # 获取滑块数值填入value
     global listaj
 
     listaj[4] = value
-    tooltip.configure(message=f'置顶透明度为{int(listaj[4])}%')
-    label_st.configure(text=f'置顶透明度为{int(listaj[4])}%')
+    tooltip.configure(message=f'置顶非透明度为{int(listaj[4])}%')
+    label_st.configure(text=f'置顶非透明度为{int(listaj[4])}%')
 
 #-------------------------------------------------获取窗口状态-----------------------------------------------------------------
 
@@ -309,7 +429,7 @@ slider_tmd = ctk.CTkSlider(frame3, from_=0, to=100, number_of_steps=100, command
 slider_tmd.set(float(listaj[4]))
 slider_tmd.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky='nsew')
 #绑定tooltip到滑块
-tooltip = CTkToolTip(slider_tmd, message=f'置顶透明度是{int(listaj[4])}%')
+tooltip = CTkToolTip(slider_tmd, message=f'置顶非透明度是{int(listaj[4])}%')
 
 #-----------------------------------------------------------控件实时刷新区-----------------------------------------------------------------------
 def remove_allgrid():
